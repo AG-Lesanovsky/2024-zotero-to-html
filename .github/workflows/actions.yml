@@ -24,7 +24,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11' # use stable python version
+          python-version: '3.13' # use latest python version
 
       - name: install python packages
         run: |

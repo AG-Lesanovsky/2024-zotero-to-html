@@ -58,7 +58,7 @@ def format_item(item):
         except KeyError:
             warnings.warn(f'No pages for {item["data"]["title"]}')
 
-    html_item += f'({item["data"]["date"].split('-')[0]})'
+    html_item += f'({item["data"]["date"].split("-")[0]})'
     html_item += "</a></strong></li>\n"
     return html_item
 
