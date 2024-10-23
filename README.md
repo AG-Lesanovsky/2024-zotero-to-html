@@ -19,9 +19,10 @@ You find the recent html file [here](https://htmlpreview.github.io/?https://raw.
 1. You have to be a member of the Zotero
    group [Center for Quantum Science](https://www.zotero.org/groups/5693788/cqs/library).
 2. Create a new entry and select the type of reference `journal article` or `preprint`.
-3. Fill in the details of the reference (title, authors, publication date, etc.).
-4. Add project tags such as `QUSP FOR5413` or `Quantera Project CoQuaDis` to categorize the reference.
-5. Save the reference.
+3. **Enter all entries in unicode, no LaTeX!, no MathML!** 
+4. Fill in the details of the reference (title, authors, publication date, etc.).
+5. Add project tags such as `QUSP FOR5413` or `Quantera Project CoQuaDis` to categorize the reference.
+6. Save the reference.
 
 ## Copying Bibliography to TYPO3
 
