@@ -34,13 +34,18 @@ jobs:
       - name: execute py script
         run: python zotero-to-html.py
 
-      - name: commit files
+      - name: check for changes
         run: |
           git config --local user.email "48565736+Babalion@users.noreply.github.com"
           git config --local user.name "Babalion"
-          git add -A
-          git diff --exit-code || git commit -a -m "updated with action" --allow-empty
+          git diff --exit-code bibliography.html || echo "Changes detected"
 
-      - name: push changes
+      # Step 6: Commit and push changes (if any)
+      - name: Commit and push changes
+        if: success()  # Ensure the script runs successfully
         run: |
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
+          git add bibliography.html
+          git commit -m "Update bibliography.html via GitHub Actions" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub's built-in token for auth
