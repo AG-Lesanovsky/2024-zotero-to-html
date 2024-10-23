@@ -5,7 +5,7 @@ import requests
 
 def get_data():
     start = 0
-    limit = 25
+    limit = 100
     data = {}
     while True:
         # URL of the Zotero API with specific parameters
@@ -59,7 +59,7 @@ def format_item(item):
             warnings.warn(f'No pages for {item["data"]["title"]}')
 
     html_item += f'({item["data"]["date"].split('-')[0]})'
-    html_item += "</a></strong></li>"
+    html_item += "</a></strong></li>\n"
     return html_item
 
 
