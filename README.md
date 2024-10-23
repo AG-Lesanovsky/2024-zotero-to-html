@@ -4,7 +4,7 @@ This project fetches bibliography data from the Zotero API and generates an HTML
 bibliography. The purpose of this project is to automatically generate HTML code that can be used to paste in the
 backend of TYPO3 to generate the publication lists on https://uni-tuebingen.de/cqs.
 
-You find the recent html file [here](https://htmlpreview.github.io/?https://github.com/TODO).
+You find the recent html file [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AG-Lesanovsky/2024-zotero-to-html/refs/heads/master/bibliography.html).
 
 ## Features
 
@@ -25,7 +25,7 @@ You find the recent html file [here](https://htmlpreview.github.io/?https://gith
 
 ## Copying Bibliography to TYPO3
 
-1. Visit [here](https://htmlpreview.github.io/?https://github.com/TODO).
+1. Visit [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AG-Lesanovsky/2024-zotero-to-html/refs/heads/master/bibliography.html).
 2. Copy the HTML content which you want to copy.
 3. Open the TYPO3 backend of the page where you want to add the bibliography.
 4. Paste the copied HTML content.
