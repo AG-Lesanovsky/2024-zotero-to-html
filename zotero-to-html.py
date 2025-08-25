@@ -223,7 +223,8 @@ html_content = '''
 </head>
 <body>
     <h1>Center for Quantum Science Publications</h1>
-<ul>
+    <p>Sprungmarken: <a href="#qusp-only">QUSP-only</a> | <a href="#coquadis-only">CoQuaDis-only</a></p>
+<ol>
 '''
 
 # Process all items
@@ -234,15 +235,15 @@ for page_index in data.keys():
         html_content += format_item(item)
 
 # Add a section for "QUSP-only"
-html_content += "</ul><h2>QUSP-only</h2><ul>"
+html_content += "</ol><h2 id=\"qusp-only\">QUSP-only</h2><ol>"
 html_content += process_items_by_tag(data, "QUSP FOR5413")
 
 # Add a section for "CoQuaDis-only"
-html_content += "</ul><h2>CoQuaDis-only</h2><ul>"
+html_content += "</ol><h2 id=\"coquadis-only\">CoQuaDis-only</h2><ol>"
 html_content += process_items_by_tag(data, "Quantera Project CoQuaDis")
 
 # Close the HTML document
-html_content += "</ul></body></html>"
+html_content += "</ol></body></html>"
 
 # Write the HTML content to a file
 with open("bibliography.html", "w", encoding="utf-8") as file:
