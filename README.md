@@ -14,7 +14,7 @@ This repository contains a script that:
 A GitHub Action ensures that the file is always current:  
 Every night at **03:00 (CET)** the script runs automatically and updates the bibliography.  
 
-👉 You can always preview the most recent bibliography [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AG-Lesanovsky/2024-zotero-to-html/refs/heads/master/bibliography.html).
+👉 You can always preview the most **recent bibliography [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AG-Lesanovsky/2024-zotero-to-html/refs/heads/master/bibliography.html)**.
 
 ---
 
