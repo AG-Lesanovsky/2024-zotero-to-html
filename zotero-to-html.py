@@ -81,18 +81,18 @@ def sanity_check_items(data, required_fields=None):
     """
     if required_fields is None:
         required_fields = ["title", "date", "creators"]
-    # Problematische Unicode-Zeichen, die zu HTML-Darstellungsproblemen führen können
+    # Problematic Unicode characters that may cause HTML rendering issues
     problematic_unicode_chars = ['\u2062', '\u200B', '\u200C', '\u200D', '\uFEFF']
     for start, items in data.items():
         for i, item in enumerate(items):
             missing = [field for field in required_fields if field not in item["data"]]
             title = item["data"].get("title", "<no title>")
-            # Prüfe auf problematische Unicode-Zeichen im Titel
+            # Check for problematic Unicode characters in the title
             for char in title:
                 if char in problematic_unicode_chars:
                     warnings.warn(
-                        f"Problematisches Unicode-Zeichen U+{ord(char):04X} ('{repr(char)}') im Titel gefunden: '{title}'. "
-                        f"Das HTML könnte fehlerhaft dargestellt werden.\nItem data: {item['data']}\n"
+                        f"Problematic Unicode character U+{ord(char):04X} ('{repr(char)}') found in title: '{title}'. "
+                        f"HTML may be rendered incorrectly.\nItem data: {item['data']}\n"
                     )
             if missing:
                 warnings.warn(
