@@ -44,8 +44,73 @@ def get_data():
     return all_data
 
 
+def filter_items(data, exclude_types=None):
+    """
+    Removes all items with certain itemTypes from the data.
+
+    Args:
+        data (dict): The raw data from get_data().
+        exclude_types (list): List of itemTypes to be removed.
+
+    Returns:
+        dict: Filtered data structure like the original.
+    """
+    if exclude_types is None:
+        exclude_types = []
+    filtered_data = {}
+    for start, items in data.items():
+        filtered_items = []
+        for i, item in enumerate(items):
+            item_type = item["data"].get("itemType")
+            if item_type in exclude_types:
+                warnings.warn(
+                    f"Filtered out item at index {i} on page {start} with itemType '{item_type}': {item['data']}")
+            else:
+                filtered_items.append(item)
+        filtered_data[start] = filtered_items
+    return filtered_data
+
+
+def sanity_check_items(data, required_fields=None):
+    """
+    Checks if all items contain the required fields and warns about problematic unicode in titles.
+
+    Args:
+        data (dict): The filtered data.
+        required_fields (list): List of required fields in item["data"].
+    """
+    if required_fields is None:
+        required_fields = ["title", "date", "creators"]
+    # Problematische Unicode-Zeichen, die zu HTML-Darstellungsproblemen führen können
+    problematic_unicode_chars = ['\u2062', '\u200B', '\u200C', '\u200D', '\uFEFF']
+    for start, items in data.items():
+        for i, item in enumerate(items):
+            missing = [field for field in required_fields if field not in item["data"]]
+            title = item["data"].get("title", "<no title>")
+            # Prüfe auf problematische Unicode-Zeichen im Titel
+            for char in title:
+                if char in problematic_unicode_chars:
+                    warnings.warn(
+                        f"Problematisches Unicode-Zeichen U+{ord(char):04X} ('{repr(char)}') im Titel gefunden: '{title}'. "
+                        f"Das HTML könnte fehlerhaft dargestellt werden.\nItem data: {item['data']}\n"
+                    )
+            if missing:
+                warnings.warn(
+                    f"Sanity check failed for item {i + 1} on page {start}: missing fields: {', '.join(missing)}\n"
+                    f"Item data: {item['data']}\n"
+                )
+            else:
+                print(f"Sanity check passed for item {i + 1} on page {start}: {item['data']}")
+
+
 # Data retrieval from Zotero API
 data = get_data()
+# Remove all items with itemType 'attachment'
+data = filter_items(data, exclude_types=["attachment", "note"])
+# Sanity check for required fields
+sanity_check_items(data, required_fields=[
+    "creators", "title", "date", "DOI", "itemType", "tags"
+])
 
 
 # %%
