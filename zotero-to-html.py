@@ -94,6 +94,14 @@ def sanity_check_items(data, required_fields=None):
                         f"Problematic Unicode character U+{ord(char):04X} ('{repr(char)}') found in title: '{title}'. "
                         f"HTML may be rendered incorrectly.\nItem data: {item['data']}\n"
                     )
+            # Check archiveID does not include the discouraged 'arxiv:' prefix
+            archive_id = item["data"].get("archiveID")
+            if archive_id and "arxiv" in archive_id.lower():
+                warnings.warn(
+                    f"archiveID for title {title} on page {start} contains the prefix 'arxiv:': '{archive_id}'. "
+                    "Consider removing the 'arxiv:' prefix (use the bare identifier, e.g. '2101.00001')."
+                )
+            # Warn if any required fields are missing
             if missing:
                 warnings.warn(
                     f"Sanity check failed for item {i + 1} on page {start}: missing fields: {', '.join(missing)}\n"
